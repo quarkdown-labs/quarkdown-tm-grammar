@@ -195,8 +195,6 @@ repository:
     - {include: text.html.derivative}
     - {include: '#heading-setext'}
     while: (^|\G)((?=\s*[-=]{3,}\s*$)|[ ]{4,}(?=[^ \t\n]))
-  raw_block: {begin: '(^|\G)([ ]{4}|\t)', name: markup.raw.block.markdown, while: '(^|\G)([
-      ]{4}|\t)'}
   separator: {match: '(^|\G)[ ]{0,3}([\*\-\_])([ ]{0,2}\2){2,}[ \t]*$\n?', name: meta.separator.markdown}
   frontMatter:
     begin: \A(?=(-{3,}))
