@@ -29,7 +29,7 @@ jobs:
       #  run: npm test
 
       - name: Commit & Push updated syntaxes
-        if: github.event_name == 'push'
+        shell: bash
         run: |
           set -e
           echo "Checking for changes in syntaxes/"
@@ -48,7 +48,9 @@ jobs:
           commit_msg="chore(ci): update generated syntaxes [skip ci]"
           git commit -m "$commit_msg"
           # Rebase in case of concurrent updates
-          git pull --rebase origin "${GITHUB_REF#refs/heads/}" || true
+          if ! git pull --rebase origin "${GITHUB_REF#refs/heads/}"; then
+            echo "git pull --rebase failed. Please resolve conflicts manually."
+            exit 1
+          fi
           git push origin HEAD:"${GITHUB_REF#refs/heads/}"
-        shell: bash
 
