@@ -4,15 +4,12 @@
   <dict>
     <key>fileTypes</key>
     <array>
-      <string>md</string>
-      <string>mdown</string>
-      <string>markdown</string>
-      <string>markdn</string>
+      <string>qd</string>
     </array>
     <key>keyEquivalent</key>
     <string>^~M</string>
     <key>name</key>
-    <string>Markdown</string>
+    <string>Quarkdown</string>
     <key>patterns</key>
     <array>
       <dict>
@@ -5139,7 +5136,7 @@
       </dict>
     </dict>
     <key>scopeName</key>
-    <string>text.html.markdown</string>
+    <string>text.quarkdown</string>
     <key>uuid</key>
     <string>0A1D9874-B448-11D9-BD50-000D93B6E43C</string>
   </dict>
