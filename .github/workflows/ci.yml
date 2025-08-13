@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-test:
-    name: Build & Test
+    name: Build and push
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -33,6 +33,7 @@ jobs:
         run: |
           set -e
           echo "Checking for changes in syntaxes/"
+          ls syntaxes
           if git diff --quiet --exit-code -- syntaxes/; then
             echo "No changes to commit."
             exit 0
