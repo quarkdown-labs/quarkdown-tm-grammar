@@ -4063,8 +4063,6 @@
             <string>#heading-setext</string>
           </dict>
         </array>
-        <key>while</key>
-        <string>(^|\G)((?=\s*[-=]{3,}\s*$)|[ ]{4,}(?=[^ \t\n]))</string>
       </dict>
       <key>separator</key>
       <dict>
