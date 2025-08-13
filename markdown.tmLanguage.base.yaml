@@ -1,6 +1,6 @@
-fileTypes: [md, mdown, markdown, markdn]
+fileTypes: [qd]
 keyEquivalent: ^~M
-name: Markdown
+name: Quarkdown
 patterns:
 - {include: '#frontMatter'}
 - {include: '#block'}
@@ -586,5 +586,5 @@ repository:
       '3': {name: punctuation.definition.strikethrough.markdown}
     match: (?<!\\)(~{2,})(?!(?<=\w~~)_)((?:[^~]|(?!(?<![~\\])\1(?!~))~)*+)(\1)(?!(?<=_\1)\w)
     name: markup.strikethrough.markdown
-scopeName: text.html.markdown
+scopeName: text.quarkdown
 uuid: 0A1D9874-B448-11D9-BD50-000D93B6E43C
