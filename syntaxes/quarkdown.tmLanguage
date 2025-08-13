@@ -4066,15 +4066,6 @@
         <key>while</key>
         <string>(^|\G)((?=\s*[-=]{3,}\s*$)|[ ]{4,}(?=[^ \t\n]))</string>
       </dict>
-      <key>raw_block</key>
-      <dict>
-        <key>begin</key>
-        <string>(^|\G)([ ]{4}|\t)</string>
-        <key>name</key>
-        <string>markup.raw.block.markdown</string>
-        <key>while</key>
-        <string>(^|\G)([ ]{4}|\t)</string>
-      </dict>
       <key>separator</key>
       <dict>
         <key>match</key>
