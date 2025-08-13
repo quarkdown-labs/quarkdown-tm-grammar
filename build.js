@@ -136,7 +136,7 @@ const buildGrammar = () => {
 
 	const grammar = yaml.safeLoad(text);
 	const out = plist.build(grammar);
-	fs.writeFileSync(path.join(__dirname, 'syntaxes', 'markdown.tmLanguage'), out);
+	fs.writeFileSync(path.join(__dirname, 'syntaxes', 'quarkdown.tmLanguage'), out);
 };
 
 buildGrammar();
