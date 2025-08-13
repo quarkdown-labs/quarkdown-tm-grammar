@@ -49,10 +49,6 @@
           </dict>
           <dict>
             <key>include</key>
-            <string>#raw_block</string>
-          </dict>
-          <dict>
-            <key>include</key>
             <string>#link-def</string>
           </dict>
           <dict>
