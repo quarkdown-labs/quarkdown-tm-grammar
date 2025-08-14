@@ -53,7 +53,7 @@ repository:
     beginCaptures:
       '3': {name: punctuation.definition.markdown}
       '4': {name: fenced_code.block.language}
-    end: (^|\G)(\2|\s{0,3})(\3)\s*$
+    end: (^|\G)\s*(\3)\s*$
     endCaptures:
       '3': {name: punctuation.definition.markdown}
     name: markup.fenced_code.block.markdown
@@ -208,12 +208,12 @@ repository:
       while: ((^|\G)([ ]{2,4}|\t))|(^[ \t]*$)
   paragraph:
     begin: (^|\G)[ ]*(?=[^\t\n])
+    end: (?=\R) # Forces to end the paragraph at a block function call
     name: meta.paragraph.markdown
     patterns:
     - {include: '#inline'}
     - {include: text.html.derivative}
     - {include: '#heading-setext'}
-    while: (^|\G)((?=\s*[-=]{3,}\s*$)|[ ]{4,})
   separator: {match: '(^|\G)[ ]{0,3}([\*\-\_])([ ]{0,2}\2){2,}[ \t]*$\n?', name: meta.separator.markdown}
   frontMatter:
     begin: \A(?=(-{3,}))
