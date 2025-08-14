@@ -29,11 +29,19 @@
         <array>
           <dict>
             <key>include</key>
+            <string>#fenced_code_block</string>
+          </dict>
+          <dict>
+            <key>include</key>
             <string>#body_indent</string>
           </dict>
           <dict>
             <key>include</key>
             <string>#separator</string>
+          </dict>
+          <dict>
+            <key>include</key>
+            <string>#page_break</string>
           </dict>
           <dict>
             <key>include</key>
@@ -46,10 +54,6 @@
           <dict>
             <key>include</key>
             <string>#lists</string>
-          </dict>
-          <dict>
-            <key>include</key>
-            <string>#fenced_code_block</string>
           </dict>
           <dict>
             <key>include</key>
@@ -4096,6 +4100,13 @@
       <dict>
         <key>match</key>
         <string>(^|\G)[ ]{0,3}([\*\-\_])([ ]{0,2}\2){2,}[ \t]*$\n?</string>
+        <key>name</key>
+        <string>meta.separator.markdown</string>
+      </dict>
+      <key>page_break</key>
+      <dict>
+        <key>match</key>
+        <string>(^|\G)[ ]{0,3}&lt;{3,}(?=[ \t]*\n)</string>
         <key>name</key>
         <string>meta.separator.markdown</string>
       </dict>
