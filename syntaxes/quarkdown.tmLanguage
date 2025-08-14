@@ -3510,7 +3510,7 @@
           </dict>
         </dict>
         <key>end</key>
-        <string>(^|\G)\s*(\3)\s*$</string>
+        <string>(^|\G)(\2|\s{0,3})\s*(\3)\s*$</string>
         <key>endCaptures</key>
         <dict>
           <key>3</key>
