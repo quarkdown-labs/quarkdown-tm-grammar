@@ -29,6 +29,10 @@
         <array>
           <dict>
             <key>include</key>
+            <string>#body_indent</string>
+          </dict>
+          <dict>
+            <key>include</key>
             <string>#separator</string>
           </dict>
           <dict>
@@ -62,6 +66,28 @@
           <dict>
             <key>include</key>
             <string>#paragraph</string>
+          </dict>
+        </array>
+      </dict>
+      <key>body_indent</key>
+      <dict>
+        <key>begin</key>
+        <string>(?:^|\G)([ ]{2,}|\t+)(?=\S)</string>
+        <key>end</key>
+        <string>(?=\R)</string>
+        <key>beginCaptures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>markup.indent.markdown</string>
+          </dict>
+        </dict>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>include</key>
+            <string>#block</string>
           </dict>
         </array>
       </dict>
@@ -3484,7 +3510,7 @@
           </dict>
         </dict>
         <key>end</key>
-        <string>(^|\G)(\2|\s{0,3})(\3)\s*$</string>
+        <string>(^|\G)\s*(\3)\s*$</string>
         <key>endCaptures</key>
         <dict>
           <key>3</key>
@@ -4046,6 +4072,8 @@
       <dict>
         <key>begin</key>
         <string>(^|\G)[ ]*(?=[^\t\n])</string>
+        <key>end</key>
+        <string>(?=\R)</string>
         <key>name</key>
         <string>meta.paragraph.markdown</string>
         <key>patterns</key>
@@ -4063,8 +4091,6 @@
             <string>#heading-setext</string>
           </dict>
         </array>
-        <key>while</key>
-        <string>(^|\G)((?=\s*[-=]{3,}\s*$)|[ ]{4,})</string>
       </dict>
       <key>separator</key>
       <dict>
