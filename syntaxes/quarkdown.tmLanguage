@@ -4407,89 +4407,109 @@
           <key>1</key>
           <dict>
             <key>name</key>
-            <string>punctuation.definition.link.description.begin.markdown</string>
+            <string>punctuation.definition.image.markdown</string>
           </dict>
           <key>2</key>
           <dict>
             <key>name</key>
-            <string>string.other.link.description.markdown</string>
+            <string>punctuation.definition.image.size.begin.markdown</string>
+          </dict>
+          <key>3</key>
+          <dict>
+            <key>name</key>
+            <string>constant.numeric</string>
           </dict>
           <key>4</key>
           <dict>
             <key>name</key>
-            <string>punctuation.definition.link.description.end.markdown</string>
+            <string>punctuation.definition.image.size.end.markdown</string>
           </dict>
           <key>5</key>
           <dict>
             <key>name</key>
-            <string>punctuation.definition.metadata.markdown</string>
+            <string>punctuation.definition.link.description.begin.markdown</string>
           </dict>
-          <key>7</key>
+          <key>6</key>
           <dict>
             <key>name</key>
-            <string>punctuation.definition.link.markdown</string>
+            <string>string.other.link.description.markdown</string>
           </dict>
           <key>8</key>
           <dict>
             <key>name</key>
-            <string>markup.underline.link.image.markdown</string>
+            <string>punctuation.definition.link.description.end.markdown</string>
           </dict>
           <key>9</key>
           <dict>
             <key>name</key>
-            <string>punctuation.definition.link.markdown</string>
+            <string>punctuation.definition.metadata.markdown</string>
           </dict>
-          <key>10</key>
+          <key>11</key>
           <dict>
             <key>name</key>
-            <string>markup.underline.link.image.markdown</string>
+            <string>punctuation.definition.link.markdown</string>
           </dict>
           <key>12</key>
           <dict>
             <key>name</key>
-            <string>string.other.link.description.title.markdown</string>
+            <string>markup.underline.link.image.markdown</string>
           </dict>
           <key>13</key>
           <dict>
             <key>name</key>
-            <string>punctuation.definition.string.begin.markdown</string>
+            <string>punctuation.definition.link.markdown</string>
           </dict>
           <key>14</key>
           <dict>
             <key>name</key>
-            <string>punctuation.definition.string.end.markdown</string>
-          </dict>
-          <key>15</key>
-          <dict>
-            <key>name</key>
-            <string>string.other.link.description.title.markdown</string>
+            <string>markup.underline.link.image.markdown</string>
           </dict>
           <key>16</key>
           <dict>
             <key>name</key>
-            <string>punctuation.definition.string.begin.markdown</string>
+            <string>string.other.link.description.title.markdown</string>
           </dict>
           <key>17</key>
           <dict>
             <key>name</key>
-            <string>punctuation.definition.string.end.markdown</string>
+            <string>punctuation.definition.string.begin.markdown</string>
           </dict>
           <key>18</key>
           <dict>
             <key>name</key>
-            <string>string.other.link.description.title.markdown</string>
+            <string>punctuation.definition.string.end.markdown</string>
           </dict>
           <key>19</key>
           <dict>
             <key>name</key>
-            <string>punctuation.definition.string.begin.markdown</string>
+            <string>string.other.link.description.title.markdown</string>
           </dict>
           <key>20</key>
           <dict>
             <key>name</key>
-            <string>punctuation.definition.string.end.markdown</string>
+            <string>punctuation.definition.string.begin.markdown</string>
           </dict>
           <key>21</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.definition.string.end.markdown</string>
+          </dict>
+          <key>22</key>
+          <dict>
+            <key>name</key>
+            <string>string.other.link.description.title.markdown</string>
+          </dict>
+          <key>23</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.definition.string.begin.markdown</string>
+          </dict>
+          <key>24</key>
+          <dict>
+            <key>name</key>
+            <string>punctuation.definition.string.end.markdown</string>
+          </dict>
+          <key>25</key>
           <dict>
             <key>name</key>
             <string>punctuation.definition.metadata.markdown</string>
@@ -4497,23 +4517,25 @@
         </dict>
         <key>match</key>
         <string>(?x)
-  (\!\[)((?&lt;square&gt;[^\[\]\\]|\\.|\[\g&lt;square&gt;*+\])*+)(\])
-                # Match the link text.
-  (\()            # Opening paren for url
-    # The url
+  (\!)                                   # 1 bang
+  (?: (\() ([^()\n]*) (\)) )?           # 2 '(' size 3 content 4 ')'
+  (\[)                                   # 5 alt text open
+    ( (?&lt;square&gt;[^\[\]\\]|\\.|\[\g&lt;square&gt;*+\])*+ )   # 6 alt (7 named)
+  (\])                                   # 8 alt text close
+  (\()                                   # 9 opening paren for url
       [ \t]*
-      (
-         (&lt;)((?:\\[&lt;&gt;]|[^&lt;&gt;\n])*)(&gt;)
-         | ((?&lt;url&gt;(?&gt;[^\s()]+)|\(\g&lt;url&gt;*\))*)
+      (                                   # 10 url wrapper (angle or normal)
+         (&lt;) ((?:\\[&lt;&gt;]|[^&lt;&gt;\n])*) (&gt;)  # 11 '&lt;' 12 content 13 '&gt;'
+         | ( (?&lt;url&gt;(?&gt;[^\s()]+)|\(\g&lt;url&gt;*\))* )  # 14 normal url (15 named)
       )
       [ \t]*
     (?:
-        ((\().+?(\)))    # Match title in parens…
-      | ((").+?("))    # or in double quotes…
-      | ((').+?('))    # or in single quotes.
+        ((\().+?(\)))    # 16 title in parens 17 '(' 18 ')'
+      | ((").+?(") )     # 19 title in double quotes 20 '"' 21 '"'
+      | ((').+?('))       # 22 title in single quotes 23 "'" 24 "'"
     )?            # Title is optional
     \s*            # Optional whitespace
-  (\))
+  (\))                                   # 25 closing paren
 </string>
         <key>name</key>
         <string>meta.image.inline.markdown</string>
