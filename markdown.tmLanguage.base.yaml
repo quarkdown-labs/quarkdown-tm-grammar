@@ -188,7 +188,7 @@ repository:
       - {include: '#list_paragraph'}
       while: ((^|\G)([ ]{2,4}|\t))|(^[ \t]*$)
   paragraph:
-    begin: (^|\G)[ ]{0,3}(?=[^ \t\n])
+    begin: (^|\G)[ ]*(?=[^\t\n])
     name: meta.paragraph.markdown
     patterns:
     - {include: '#inline'}
