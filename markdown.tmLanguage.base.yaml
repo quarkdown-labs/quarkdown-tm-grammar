@@ -7,12 +7,13 @@ patterns:
 repository:
   block:
     patterns:
+    - {include: '#fenced_code_block'}
     - {include: '#body_indent'}
     - {include: '#separator'}
+    - {include: '#page_break'}
     - {include: '#heading'}
     - {include: '#blockquote'}
     - {include: '#lists'}
-    - {include: '#fenced_code_block'}
     - {include: '#link-def'}
     - {include: '#html'}
     - {include: '#table'}
