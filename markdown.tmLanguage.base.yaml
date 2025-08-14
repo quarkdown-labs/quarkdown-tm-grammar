@@ -323,54 +323,60 @@ repository:
   escape: {match: '\\[-`*_#+.!(){}\[\]\\>]', name: constant.character.escape.markdown}
   image-inline:
     captures:
-      '1': {name: punctuation.definition.link.description.begin.markdown}
-      '2': {name: string.other.link.description.markdown}
-      '4': {name: punctuation.definition.link.description.end.markdown}
-      '5': {name: punctuation.definition.metadata.markdown}
+      '1': {name: punctuation.definition.image.markdown}
+      '2': {name: punctuation.definition.image.size.begin.markdown}
+      '3': {name: constant.numeric}
+      '4': {name: punctuation.definition.image.size.end.markdown}
+      '5': {name: punctuation.definition.link.description.begin.markdown}
+      '6': {name: string.other.link.description.markdown}
+      '8': {name: punctuation.definition.link.description.end.markdown}
+      '9': {name: punctuation.definition.metadata.markdown}
 
       # Angle bracket link destination
-      '7': {name: punctuation.definition.link.markdown}
-      '8': {name: markup.underline.link.image.markdown}
-      '9': {name: punctuation.definition.link.markdown}
+      '11': {name: punctuation.definition.link.markdown}
+      '12': {name: markup.underline.link.image.markdown}
+      '13': {name: punctuation.definition.link.markdown}
 
       # Normal link destination
-      '10': {name: markup.underline.link.image.markdown}
+      '14': {name: markup.underline.link.image.markdown}
 
       # Title in parens
-      '12': {name: string.other.link.description.title.markdown}
-      '13': {name: punctuation.definition.string.begin.markdown}
-      '14': {name: punctuation.definition.string.end.markdown}
+      '16': {name: string.other.link.description.title.markdown}
+      '17': {name: punctuation.definition.string.begin.markdown}
+      '18': {name: punctuation.definition.string.end.markdown}
 
       # Title in double quotes
-      '15': {name: string.other.link.description.title.markdown}
-      '16': {name: punctuation.definition.string.begin.markdown}
-      '17': {name: punctuation.definition.string.end.markdown}
+      '19': {name: string.other.link.description.title.markdown}
+      '20': {name: punctuation.definition.string.begin.markdown}
+      '21': {name: punctuation.definition.string.end.markdown}
 
       # Title in single quotes
-      '18': {name: string.other.link.description.title.markdown}
-      '19': {name: punctuation.definition.string.begin.markdown}
-      '20': {name: punctuation.definition.string.end.markdown}
+      '22': {name: string.other.link.description.title.markdown}
+      '23': {name: punctuation.definition.string.begin.markdown}
+      '24': {name: punctuation.definition.string.end.markdown}
 
-      '21': {name: punctuation.definition.metadata.markdown}
+      '25': {name: punctuation.definition.metadata.markdown}
     match: >
       (?x)
-        (\!\[)((?<square>[^\[\]\\]|\\.|\[\g<square>*+\])*+)(\])
-                      # Match the link text.
-        (\()            # Opening paren for url
-          # The url
+        (\!)                                   # 1 bang
+        (?: (\() ([^()\n]*) (\)) )?           # 2 '(' size 3 content 4 ')'
+        (\[)                                   # 5 alt text open
+          ( (?<square>[^\[\]\\]|\\.|\[\g<square>*+\])*+ )   # 6 alt (7 named)
+        (\])                                   # 8 alt text close
+        (\()                                   # 9 opening paren for url
             [ \t]*
-            (
-               (<)((?:\\[<>]|[^<>\n])*)(>)
-               | ((?<url>(?>[^\s()]+)|\(\g<url>*\))*)
+            (                                   # 10 url wrapper (angle or normal)
+               (<) ((?:\\[<>]|[^<>\n])*) (>)  # 11 '<' 12 content 13 '>'
+               | ( (?<url>(?>[^\s()]+)|\(\g<url>*\))* )  # 14 normal url (15 named)
             )
             [ \t]*
           (?:
-              ((\().+?(\)))    # Match title in parens…
-            | ((").+?("))    # or in double quotes…
-            | ((').+?('))    # or in single quotes.
+              ((\().+?(\)))    # 16 title in parens 17 '(' 18 ')'
+            | ((").+?(") )     # 19 title in double quotes 20 '"' 21 '"'
+            | ((').+?('))       # 22 title in single quotes 23 "'" 24 "'"
           )?            # Title is optional
           \s*            # Optional whitespace
-        (\))
+        (\))                                   # 25 closing paren
     name: meta.image.inline.markdown
   image-ref:
     captures:
