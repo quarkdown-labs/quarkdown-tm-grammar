@@ -7,6 +7,7 @@ patterns:
 repository:
   block:
     patterns:
+    - {include: '#body_indent'}
     - {include: '#separator'}
     - {include: '#heading'}
     - {include: '#blockquote'}
@@ -16,6 +17,24 @@ repository:
     - {include: '#html'}
     - {include: '#table'}
     - {include: '#paragraph'}
+  body_indent:
+    # Allow arbitrarily indented block-level constructs (beyond normal 0-3 spaces)
+    # We turn indentation into a begin/while region so the remaining part of the
+    # line (after the consumed indentation) is re-tokenized using the standard
+    # #block patterns. This lets constructs like blockquotes, lists, headings,
+    # etc. work inside an indented container (e.g. after a custom directive).
+    #
+    # Example:
+    # .myfunction
+    #     > blockquote
+    #
+    # Group 2 captures the indentation and is given a scope so themes can style it.
+    begin: (?:^|\G)([ ]{2,}|\t+)(?=\S)
+    end: (?=\R)
+    beginCaptures:
+      '1': { name: markup.indent.markdown }
+    patterns:
+      - {include: '#block'}
   blockquote:
     begin: (^|\G)[ ]{0,3}(>) ?
     captures:
